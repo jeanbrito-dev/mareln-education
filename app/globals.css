@@ -1,26 +1,95 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@600;700&display=swap');
 @import "tailwindcss";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --primary: #5B8DEF;
+  --secondary: #7C83E8;
+  --accent: #8CC8E8;
+
+  --background: #F5F9FC;
+  --foreground: #26364A;
+
+  --white: #FFFFFF;
+  --gray: #718096;
+  --light-blue: #DCEEFF;
+  --soft-blue: #EAF4FC;
+  --soft-purple: #EAE9FA;
 }
 
 @theme inline {
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-accent: var(--accent);
+
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+
+  --color-white: var(--white);
+  --color-gray: var(--gray);
+
+  --color-light-blue: var(--light-blue);
+  --color-soft-blue: var(--soft-blue);
+  --color-soft-purple: var(--soft-purple);
+
+  --font-sans: 'Plus Jakarta Sans', sans-serif;
+  --font-cursive: 'Caveat', cursive;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
+  background-color: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  overflow-x: hidden;
+}
+
+/* Foco de teclado visível para acessibilidade */
+:focus-visible {
+  outline: 2px solid var(--primary);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Efeito Claymorphism Suave para Botões */
+.clay-button {
+  background: linear-gradient(135deg, #5B8DEF 0%, #7C83E8 100%);
+  color: #FFFFFF;
+  box-shadow: 
+    4px 6px 12px rgba(38, 54, 74, 0.22),
+    inset -2px -3px 5px rgba(0, 0, 0, 0.18),
+    inset 2px 3px 5px rgba(255, 255, 255, 0.45);
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.clay-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 
+    6px 9px 16px rgba(38, 54, 74, 0.28),
+    inset -2px -3px 5px rgba(0, 0, 0, 0.18),
+    inset 2px 3px 5px rgba(255, 255, 255, 0.6);
+}
+
+.clay-button:active {
+  transform: translateY(1px);
+  box-shadow: 
+    2px 3px 6px rgba(38, 54, 74, 0.2),
+    inset -1px -2px 3px rgba(0, 0, 0, 0.25),
+    inset 1px 2px 3px rgba(255, 255, 255, 0.3);
+}
+
+/* Respeito a usuários que preferem menos movimento */
+@media (prefers-reduced-motion: reduce) {
+  *, ::before, ::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+.font-cursive {
+  font-family: 'Caveat', cursive;
 }
