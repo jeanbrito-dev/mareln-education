@@ -4,8 +4,8 @@ import Header from "./components/Header";
 import Footer from "./components/Footer";
 
 export const metadata: Metadata = {
-  title: "Maré LN Educa+",
-  description: "Descubra as melhores atrações, passeios e viva experiências inesquecíveis pelo litoral.",
+  title: "MaréLN | Eventos do Litoral Norte",
+  description: "Descubra shows, festivais, feiras e eventos gratuitos do Litoral Norte de São Paulo.",
 };
 
 export default function RootLayout({

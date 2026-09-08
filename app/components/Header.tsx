@@ -23,6 +23,9 @@ export default function Header() {
           <Link href="/sobre" className="hover:text-[#8CC8E8] transition-colors py-1">
             Quem Somos
           </Link>
+          <Link href="/favoritos" className="hover:text-[#8CC8E8] transition-colors py-1">
+            Favoritos
+          </Link>
           <Link href="/contato" className="hover:text-[#8CC8E8] transition-colors py-1">
             Contato
           </Link>
@@ -70,6 +73,13 @@ export default function Header() {
             className="block py-2 text-white hover:text-[#8CC8E8] font-medium"
           >
             Quem Somos
+          </Link>
+          <Link
+            href="/favoritos"
+            onClick={() => setMobileMenuOpen(false)}
+            className="block py-2 text-white hover:text-[#8CC8E8] font-medium"
+          >
+            Favoritos
           </Link>
           <Link
             href="/contato"

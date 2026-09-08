@@ -87,18 +87,6 @@ export default function Home() {
                     {item.descricao}
                   </p>
 
-                  {item.autor && (
-                    <div className="text-xs font-medium text-[#718096]">
-                      Publicado por: <strong className="text-[#26364A]">{item.autor}</strong>
-                    </div>
-                  )}
-
-                  {item.preco && (
-                    <div className="text-lg font-black text-[#26364A]">
-                      R$ {item.preco.toFixed(2)}
-                    </div>
-                  )}
-
                   {item.contato && (
                     <div className="text-xs font-semibold text-[#5B8DEF]">
                       Contato: {item.contato}
@@ -109,7 +97,7 @@ export default function Home() {
 
               <div className="p-6 pt-0">
                 <Link
-                  href={`/detalhes/${item.id}`}
+                  href={`/evento/${item.id}`}
                   className="block text-center w-full clay-button-white font-semibold py-2.5 rounded-xl transition-all text-sm"
                 >
                   Ver Detalhes
