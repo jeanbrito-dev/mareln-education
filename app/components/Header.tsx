@@ -15,7 +15,7 @@ export default function Header() {
           <Logo variant="horizontal" theme="light" size="md" />
         </Link>
 
-        {/* Links de Navegação */}
+        {/* Links de Navegação Desktop */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/90">
           <Link href="/" className="hover:text-[#8CC8E8] transition-colors py-1">
             Início
@@ -31,7 +31,7 @@ export default function Header() {
           </Link>
         </nav>
 
-        {/* Botão de Ação CTA */}
+        {/* Botão de Ação CTA Desktop */}
         <div className="hidden md:flex items-center">
           <Link
             href="/contato"
@@ -41,54 +41,58 @@ export default function Header() {
           </Link>
         </div>
 
-        {/* Botão Hambúrguer Mobile */}
+        {/* Botão Hambúrguer Mobile — animação nas barrinhas */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden text-white p-2 rounded-xl hover:bg-white/10 transition-colors"
-          aria-label="Abrir menu de navegação"
+          className="md:hidden relative flex flex-col justify-center items-center w-10 h-10 rounded-xl hover:bg-white/10 transition-colors"
+          aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu de navegação"}
+          aria-expanded={mobileMenuOpen}
         >
-          <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            {mobileMenuOpen ? (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-            ) : (
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h16M4 18h16" />
-            )}
-          </svg>
+          {/* Barra superior */}
+          <span
+            className={`block h-0.5 w-5 bg-white rounded-full transition-all duration-300 ease-in-out ${
+              mobileMenuOpen ? "translate-y-[6px] rotate-45" : "-translate-y-[4px]"
+            }`}
+          />
+          {/* Barra do meio */}
+          <span
+            className={`block h-0.5 w-5 bg-white rounded-full transition-all duration-300 ease-in-out ${
+              mobileMenuOpen ? "opacity-0 scale-x-0" : "opacity-100 scale-x-100"
+            }`}
+          />
+          {/* Barra inferior */}
+          <span
+            className={`block h-0.5 w-5 bg-white rounded-full transition-all duration-300 ease-in-out ${
+              mobileMenuOpen ? "-translate-y-[6px] -rotate-45" : "translate-y-[4px]"
+            }`}
+          />
         </button>
       </div>
 
-      {/* Menu Mobile */}
-      {mobileMenuOpen && (
-        <div className="md:hidden bg-[#26364A] border-b border-[#5B8DEF]/20 px-4 pt-2 pb-6 space-y-3">
-          <Link
-            href="/"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-white hover:text-[#8CC8E8] font-medium"
-          >
-            Início
-          </Link>
-          <Link
-            href="/sobre"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-white hover:text-[#8CC8E8] font-medium"
-          >
-            Quem Somos
-          </Link>
-          <Link
-            href="/favoritos"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-white hover:text-[#8CC8E8] font-medium"
-          >
-            Favoritos
-          </Link>
-          <Link
-            href="/contato"
-            onClick={() => setMobileMenuOpen(false)}
-            className="block py-2 text-white hover:text-[#8CC8E8] font-medium"
-          >
-            Contato
-          </Link>
-          <div className="pt-2">
+      {/* Menu Mobile com animação de slide */}
+      <div
+        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+          mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="bg-[#26364A] border-b border-[#5B8DEF]/20 px-4 pt-2 pb-6 space-y-1">
+          {[
+            { href: "/", label: "Início" },
+            { href: "/sobre", label: "Quem Somos" },
+            { href: "/favoritos", label: "Favoritos" },
+            { href: "/contato", label: "Contato" },
+          ].map(({ href, label }) => (
+            <Link
+              key={href}
+              href={href}
+              onClick={() => setMobileMenuOpen(false)}
+              className="block py-2.5 text-white hover:text-[#8CC8E8] font-medium transition-colors"
+            >
+              {label}
+            </Link>
+          ))}
+
+          <div className="pt-3">
             <Link
               href="/contato"
               onClick={() => setMobileMenuOpen(false)}
@@ -98,7 +102,7 @@ export default function Header() {
             </Link>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }

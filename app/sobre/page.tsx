@@ -37,10 +37,10 @@ export default function Sobre() {
 
         <div className="text-center pt-4">
           <Link
-            href="/noticias"
+            href="/"
             className="inline-block clay-button font-bold px-8 py-3.5 rounded-xl text-sm transition-all shadow-md"
           >
-            Ver portal de notícias
+            Ver eventos
           </Link>
         </div>
       </div>
