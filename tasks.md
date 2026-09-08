@@ -26,6 +26,6 @@ Bloco 4: UX, SEO e Deploy (Semana 3)
 
 * [x] 16: Os metadados da aplicação (Title, Description, Open Graph para WhatsApp/Redes Sociais) estão configurados para exibir Mareln e descrições atraentes dos eventos?
 * [x] 17: Existem arquivos de feedback visual implementados, como o loading.tsx ou estados de carregamento elegantes?
-* [ ] 18: O site foi publicado com sucesso em uma plataforma de nuvem (ex: Vercel) e possui uma URL pública funcional?
-* [ ] 19: O deploy na Vercel está sincronizado e atualizado com o repositório de código?
-* [ ] 20: O site foi testado rodando direto no smartphone via link público, validando o comportamento real em
+* [x] 18: O site foi publicado com sucesso em uma plataforma de nuvem (ex: Vercel) e possui uma URL pública funcional?
+* [x] 19: O deploy na Vercel está sincronizado e atualizado com o repositório de código?
+* [x] 20: O site foi testado rodando direto no smartphone via link público, validando o comportamento real em
