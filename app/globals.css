@@ -1,4 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Caveat:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
 
 :root {
@@ -42,7 +42,7 @@ html {
 body {
   background-color: var(--background);
   color: var(--foreground);
-  font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  font-family: var(--font-sans), system-ui, -apple-system, sans-serif;
   overflow-x: hidden;
 }
 
@@ -53,43 +53,27 @@ body {
   border-radius: 4px;
 }
 
-/* Efeito Claymorphism Suave para Botões */
+/* Button utilities */
 .clay-button {
-  background: linear-gradient(135deg, #5B8DEF 0%, #7C83E8 100%);
-  color: #FFFFFF;
-  box-shadow: 
-    4px 6px 12px rgba(38, 54, 74, 0.22),
-    inset -2px -3px 5px rgba(0, 0, 0, 0.18),
-    inset 2px 3px 5px rgba(255, 255, 255, 0.45);
-  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  @apply bg-primary text-white rounded-lg px-5 py-2.5 text-sm font-medium transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-primary/30 disabled:opacity-50 disabled:pointer-events-none cursor-pointer;
 }
-
 .clay-button:hover {
-  transform: translateY(-2px);
-  box-shadow: 
-    6px 9px 16px rgba(38, 54, 74, 0.28),
-    inset -2px -3px 5px rgba(0, 0, 0, 0.18),
-    inset 2px 3px 5px rgba(255, 255, 255, 0.6);
+  @apply bg-primary/90 shadow-md shadow-primary/25;
 }
-
 .clay-button:active {
-  transform: translateY(1px);
-  box-shadow: 
-    2px 3px 6px rgba(38, 54, 74, 0.2),
-    inset -1px -2px 3px rgba(0, 0, 0, 0.25),
-    inset 1px 2px 3px rgba(255, 255, 255, 0.3);
+  @apply bg-primary/80 shadow-sm;
 }
 
-/* Respeito a usuários que preferem menos movimento */
-@media (prefers-reduced-motion: reduce) {
-  *, ::before, ::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
-  }
+.clay-button-white {
+  @apply bg-white text-primary border border-gray-300 rounded-lg px-5 py-2.5 text-sm font-medium transition-all duration-200 ease-out focus-visible:ring-2 focus-visible:ring-primary/30 disabled:opacity-50 disabled:pointer-events-none cursor-pointer;
+}
+.clay-button-white:hover {
+  @apply bg-background/50 border-background text-background shadow-md shadow-black/10;
+}
+.clay-button-white:active {
+  @apply bg-primary/10 shadow-sm;
 }
 
 .font-cursive {
-  font-family: 'Caveat', cursive;
+  font-family: var(--font-cursive);
 }

@@ -17,7 +17,7 @@ export default function Contato() {
           Participação Estudantil
         </span>
         <h1 className="text-4xl font-extrabold text-[#26364A] tracking-tight">
-          Enviar Matéria ou Contato
+          Entrar em Contato
         </h1>
         <p className="text-[#718096] text-sm max-w-md mx-auto">
           Quer publicar uma notícia, anunciar um evento do seu clube ou falar com a redação? Envie sua sugestão abaixo.
@@ -28,7 +28,7 @@ export default function Contato() {
         {enviado ? (
           <div className="text-center py-10 space-y-4">
             <div className="w-16 h-16 bg-[#EAF4FC] text-[#5B8DEF] rounded-xl flex items-center justify-center mx-auto text-2xl font-bold">
-              ✓
+              <svg className="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" /></svg> Proposta enviada com sucesso!
             </div>
             <h2 className="text-2xl font-bold text-[#26364A]">Proposta enviada com sucesso!</h2>
             <p className="text-[#718096] text-sm max-w-sm mx-auto">
@@ -71,25 +71,12 @@ export default function Contato() {
 
             <div>
               <label className="block text-sm font-semibold text-[#26364A] mb-2">
-                Tipo de envio
-              </label>
-              <select className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#26364A] focus:outline-none focus:ring-2 focus:ring-[#5B8DEF] bg-[#F5F9FC]/50">
-                <option>Notícia / Reportagem Escolar</option>
-                <option>Anúncio de Torneio de E-Sports</option>
-                <option>Inscrição de Novo Clube</option>
-                <option>Sugestão ao Grêmio Estudantil</option>
-                <option>Outros</option>
-              </select>
-            </div>
-
-            <div>
-              <label className="block text-sm font-semibold text-[#26364A] mb-2">
-                Conteúdo da matéria ou mensagem
+                Conteúdo da mensagem
               </label>
               <textarea
                 rows={5}
                 required
-                placeholder="Descreva o evento, notícia ou sugestão que você gostaria de publicar..."
+                placeholder="Descreva sua mensagem para nossa equipe..."
                 className="w-full border border-slate-200 rounded-xl px-4 py-3 text-sm text-[#26364A] focus:outline-none focus:ring-2 focus:ring-[#5B8DEF] bg-[#F5F9FC]/50"
               ></textarea>
             </div>

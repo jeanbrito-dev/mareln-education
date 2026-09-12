@@ -1,7 +1,6 @@
-// app/components/EventoFavorito.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useSyncExternalStore } from 'react';
 
 interface EventoFavoritoProps {
   eventId: string;
@@ -9,54 +8,51 @@ interface EventoFavoritoProps {
 
 const FAVORITES_KEY = 'mareln_favorites';
 
+function subscribeFavorites(callback: () => void) {
+  window.addEventListener('storage', callback);
+  window.addEventListener('mareln_favorites_updated', callback);
+  return () => {
+    window.removeEventListener('storage', callback);
+    window.removeEventListener('mareln_favorites_updated', callback);
+  };
+}
+
+function getFavoritesSnapshot(): string {
+  if (typeof window === 'undefined') return '[]';
+  return localStorage.getItem(FAVORITES_KEY) || '[]';
+}
+
+function getFavoritesServerSnapshot(): string {
+  return '[]';
+}
+
 export default function EventoFavorito({ eventId }: EventoFavoritoProps) {
-  const [isFavorited, setIsFavorited] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
+  const rawFavorites = useSyncExternalStore(
+    subscribeFavorites,
+    getFavoritesSnapshot,
+    getFavoritesServerSnapshot
+  );
 
-  // Carrega os favoritos salvos
-  useEffect(() => {
-    const stored = localStorage.getItem(FAVORITES_KEY);
+  let favoritesList: string[] = [];
+  try {
+    favoritesList = JSON.parse(rawFavorites);
+  } catch {
+    favoritesList = [];
+  }
 
-    if (stored) {
-      try {
-        const favorites: string[] = JSON.parse(stored);
-        setIsFavorited(favorites.includes(eventId));
-      } catch {
-        console.error('Erro ao carregar favoritos.');
-      }
-    }
-
-    setIsLoaded(true);
-  }, [eventId]);
-
-  // Salva os favoritos
-  useEffect(() => {
-    if (!isLoaded) return;
-
-    const stored = localStorage.getItem(FAVORITES_KEY);
-
-    let favorites: string[] = [];
-
-    if (stored) {
-      try {
-        favorites = JSON.parse(stored);
-      } catch {
-        favorites = [];
-      }
-    }
-
-    const updatedFavorites = isFavorited
-      ? Array.from(new Set([...favorites, eventId]))
-      : favorites.filter((id) => id !== eventId);
-
-    localStorage.setItem(
-      FAVORITES_KEY,
-      JSON.stringify(updatedFavorites)
-    );
-  }, [isFavorited, eventId, isLoaded]);
+  const isFavorited = favoritesList.includes(eventId);
 
   const toggleFavorite = () => {
-    setIsFavorited((prev) => !prev);
+    const nextFavorites = isFavorited
+      ? favoritesList.filter((id) => id !== eventId)
+      : [...favoritesList, eventId];
+
+    try {
+      localStorage.setItem(FAVORITES_KEY, JSON.stringify(nextFavorites));
+      window.dispatchEvent(new Event('mareln_favorites_updated'));
+    } catch {
+      console.error('Erro ao salvar favorito.');
+    }
   };
 
   return (
@@ -79,15 +75,15 @@ export default function EventoFavorito({ eventId }: EventoFavoritoProps) {
         ${
           isFavorited
             ? `
-              bg-indigo-600 text-white
-              shadow-lg shadow-indigo-600/20
+              bg-[#5B8DEF] text-white
+              shadow-lg shadow-[#5B8DEF]/25
             `
             : `
-              bg-white text-slate-700
+              bg-white text-[#26364A]
               border border-slate-200
-              hover:border-indigo-300
-              hover:bg-indigo-50
-              hover:text-indigo-600
+              hover:border-[#8CC8E8]
+              hover:bg-[#EAF4FC]
+              hover:text-[#5B8DEF]
             `
         }
       `}
@@ -155,17 +151,7 @@ export default function EventoFavorito({ eventId }: EventoFavoritoProps) {
       </span>
 
       {/* Texto */}
-      <span
-        className={`
-          transition-[transform,opacity]
-          duration-300 ease-out
-          ${
-            isFavorited
-              ? 'translate-x-0'
-              : 'translate-x-0'
-          }
-        `}
-      >
+      <span>
         {isFavorited ? 'Favoritado' : 'Favoritar Evento'}
       </span>
     </button>
