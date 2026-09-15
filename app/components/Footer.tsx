@@ -49,12 +49,6 @@ export default function Footer() {
               <li>
                 <Link href="/contato" className="hover:text-[#8CC8E8] transition-colors">Fale com a Redação</Link>
               </li>
-              <li>
-                <Link href="/admin" className="hover:text-[#8CC8E8] transition-colors flex items-center gap-1.5">
-                  <svg className="w-4 h-4 mr-1 inline-block" fill="none" stroke="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 11c-1.657 0-3 .895-3 2v2h6v-2c0-1.105-1.343-2-3-2z" /><rect width="18" height="12" x="3" y="9" rx="2" ry="2" stroke="currentColor" strokeWidth={2} fill="none" /></svg>
-                  <span>Acesso Administrativo</span>
-                </Link>
-              </li>
             </ul>
 
             <div className="mt-5 pt-4 border-t border-white/10">
