@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import Header from "./components/Header";
-import Footer from "./components/Footer";
+import AppShell from "./components/AppShell";
+import { AuthProvider } from "./components/AuthProvider";
 
 export const metadata: Metadata = {
   title: "MaréLN | Eventos do Litoral Norte",
@@ -14,18 +14,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
-      <body className="bg-[#F5F9FC] text-[#26364A] flex flex-col min-h-screen antialiased">
-        {/* Cabeçalho fixo em todas as páginas */}
-        <Header />
-
-        {/* Conteúdo principal dinâmico */}
-        <main className="flex-grow w-full">
-          {children}
-        </main>
-
-        {/* Rodapé fixo */}
-        <Footer />
+    <html lang="pt-BR" data-scroll-behavior="smooth">
+      <body className="min-h-screen bg-[#F5F9FC] text-[#26364A] antialiased">
+        <AuthProvider>
+          <AppShell>{children}</AppShell>
+        </AuthProvider>
       </body>
     </html>
   );

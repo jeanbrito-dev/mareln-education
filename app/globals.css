@@ -93,3 +93,30 @@ body {
 .font-cursive {
   font-family: 'Caveat', cursive;
 }
+
+.welcome-hero {
+  background-position: center;
+  background-size: cover;
+}
+
+.auth-input {
+  width: 100%;
+  border: 1px solid #cbd9e8;
+  border-radius: 0.75rem;
+  background: rgba(255, 255, 255, 0.82);
+  padding: 0.8rem 1rem;
+  color: #26364a;
+  font-size: 0.875rem;
+  outline: none;
+  transition: border-color 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.auth-input::placeholder {
+  color: #91a0b3;
+}
+
+.auth-input:focus {
+  border-color: #5b8def;
+  background: #ffffff;
+  box-shadow: 0 0 0 3px rgba(91, 141, 239, 0.16);
+}

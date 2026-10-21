@@ -33,7 +33,7 @@ export default async function DetalheNoticia({ params }: PageProps) {
     return (
       <div className="py-20 text-center space-y-4">
         <h1 className="text-2xl font-bold text-[#26364A]">Artigo ou matéria não encontrada!</h1>
-        <Link href="/" className="inline-block text-[#5B8DEF] font-bold underline">
+        <Link href="/portal" className="inline-block text-[#5B8DEF] font-bold underline">
           Voltar para a página inicial
         </Link>
       </div>
@@ -44,7 +44,7 @@ export default async function DetalheNoticia({ params }: PageProps) {
     <article className="py-12 px-4 sm:px-6 lg:px-8 max-w-4xl mx-auto space-y-8">
       {/* Link de retorno */}
       <Link
-        href="/"
+        href="/portal"
         className="inline-flex items-center gap-2 text-sm font-semibold text-[#5B8DEF] hover:text-[#7C83E8] transition-colors"
       >
         <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -98,7 +98,7 @@ export default async function DetalheNoticia({ params }: PageProps) {
 
         <div className="pt-6 border-t border-slate-100">
           <Link
-            href="/"
+            href="/portal"
             className="inline-block clay-button font-bold px-8 py-3 rounded-xl text-sm transition-all shadow"
           >
             Voltar para todos os artigos

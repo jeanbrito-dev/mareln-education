@@ -8,7 +8,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-3 gap-10 pb-12 border-b border-white/10">
           {/* Marca com Logo */}
           <div className="space-y-4">
-            <Link href="/" className="inline-block hover:opacity-95 transition-opacity">
+            <Link href="/portal" className="inline-block hover:opacity-95 transition-opacity">
               <Logo variant="horizontal" theme="light" size="md" />
             </Link>
             <p className="text-sm text-[#DCEEFF]/70 leading-relaxed">
@@ -23,7 +23,7 @@ export default function Footer() {
             </h4>
             <ul className="space-y-2.5 text-sm text-[#DCEEFF]/80">
               <li>
-                <Link href="/" className="hover:text-[#8CC8E8] transition-colors">Início</Link>
+                <Link href="/portal" className="hover:text-[#8CC8E8] transition-colors">Início</Link>
               </li>
               <li>
                 <Link href="/sobre" className="hover:text-[#8CC8E8] transition-colors">Quem Somos</Link>

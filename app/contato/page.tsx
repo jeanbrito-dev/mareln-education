@@ -1,12 +1,20 @@
 "use client";
 
 import { useState } from "react";
+import { useRouter } from "next/navigation";
+import { useAuth } from "../components/AuthProvider";
 
 export default function Contato() {
+  const router = useRouter();
+  const { isAuthenticated, isReady } = useAuth();
   const [enviado, setEnviado] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if (!isAuthenticated) {
+      router.push("/login?reason=auth&next=/contato");
+      return;
+    }
     setEnviado(true);
   };
 
@@ -96,6 +104,7 @@ export default function Contato() {
 
             <button
               type="submit"
+              disabled={!isReady}
               className="w-full clay-button font-bold py-3.5 rounded-xl transition-all text-sm shadow-md"
             >
               Enviar proposta para publicação

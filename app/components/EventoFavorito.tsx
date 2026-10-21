@@ -1,68 +1,33 @@
 // app/components/EventoFavorito.tsx
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useRouter } from 'next/navigation';
+import { useAuth } from './AuthProvider';
+import { useFavorites } from '../hooks/useFavorites';
 
 interface EventoFavoritoProps {
   eventId: string;
 }
 
-const FAVORITES_KEY = 'mareln_favorites';
-
 export default function EventoFavorito({ eventId }: EventoFavoritoProps) {
-  const [isFavorited, setIsFavorited] = useState(false);
-  const [isLoaded, setIsLoaded] = useState(false);
-
-  // Carrega os favoritos salvos
-  useEffect(() => {
-    const stored = localStorage.getItem(FAVORITES_KEY);
-
-    if (stored) {
-      try {
-        const favorites: string[] = JSON.parse(stored);
-        setIsFavorited(favorites.includes(eventId));
-      } catch {
-        console.error('Erro ao carregar favoritos.');
-      }
-    }
-
-    setIsLoaded(true);
-  }, [eventId]);
-
-  // Salva os favoritos
-  useEffect(() => {
-    if (!isLoaded) return;
-
-    const stored = localStorage.getItem(FAVORITES_KEY);
-
-    let favorites: string[] = [];
-
-    if (stored) {
-      try {
-        favorites = JSON.parse(stored);
-      } catch {
-        favorites = [];
-      }
-    }
-
-    const updatedFavorites = isFavorited
-      ? Array.from(new Set([...favorites, eventId]))
-      : favorites.filter((id) => id !== eventId);
-
-    localStorage.setItem(
-      FAVORITES_KEY,
-      JSON.stringify(updatedFavorites)
-    );
-  }, [isFavorited, eventId, isLoaded]);
+  const router = useRouter();
+  const { isAuthenticated, isReady } = useAuth();
+  const { favorites, toggleFavorite: updateFavorite } = useFavorites();
+  const isFavorited = favorites.includes(eventId);
 
   const toggleFavorite = () => {
-    setIsFavorited((prev) => !prev);
+    if (!isAuthenticated) {
+      router.push(`/login?reason=auth&next=/evento/${eventId}`);
+      return;
+    }
+    updateFavorite(eventId);
   };
 
   return (
     <button
       type="button"
       onClick={toggleFavorite}
+      disabled={!isReady}
       aria-label={
         isFavorited
           ? 'Remover evento dos favoritos'

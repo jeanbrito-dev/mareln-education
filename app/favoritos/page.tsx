@@ -1,40 +1,41 @@
 'use client';
 
-import { useState, useEffect } from 'react';
 import { dadosFicticios, ItemDados } from '../dados';
 import Link from 'next/link';
-
-const FAVORITES_KEY = 'mareln_favorites';
+import { useAuth } from '../components/AuthProvider';
+import { useFavorites } from '../hooks/useFavorites';
 
 export default function FavoritosPage() {
-  const [favoritos, setFavoritos] = useState<ItemDados[]>([]);
-  const [carregando, setCarregando] = useState(true);
-
-  useEffect(() => {
-    const stored = localStorage.getItem(FAVORITES_KEY);
-    if (stored) {
-      const ids: string[] = JSON.parse(stored);
-      const eventosFavoritos = dadosFicticios.filter((item) =>
-        ids.includes(item.id)
-      );
-      setFavoritos(eventosFavoritos);
-    }
-    setCarregando(false);
-  }, []);
+  const { isAuthenticated, isReady } = useAuth();
+  const { favorites: favoriteIds, removeFavorite } = useFavorites();
+  const favoritos: ItemDados[] = dadosFicticios.filter((item) => favoriteIds.includes(item.id));
 
   const removerFavorito = (id: string) => {
-    const stored = localStorage.getItem(FAVORITES_KEY);
-    const ids: string[] = stored ? JSON.parse(stored) : [];
-    const novosIds = ids.filter((favId) => favId !== id);
-    localStorage.setItem(FAVORITES_KEY, JSON.stringify(novosIds));
-    setFavoritos((prev) => prev.filter((item) => item.id !== id));
+    removeFavorite(id);
   };
 
-  if (carregando) {
+  if (!isReady) {
     return (
       <div className="py-20 text-center">
         <p className="text-[#718096]">Carregando favoritos...</p>
       </div>
+    );
+  }
+
+  if (!isAuthenticated) {
+    return (
+      <section className="mx-auto flex max-w-2xl flex-col items-center px-4 py-24 text-center">
+        <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#EAF4FC] text-3xl" aria-hidden="true">
+          🔒
+        </div>
+        <h1 className="text-3xl font-extrabold tracking-tight text-[#26364A]">Entre para ver seus favoritos</h1>
+        <p className="mt-3 max-w-md text-sm leading-relaxed text-[#718096]">
+          Você pode explorar o portal como anônimo, mas precisa de uma conta para salvar e organizar eventos.
+        </p>
+        <Link href="/login?reason=auth&next=/favoritos" className="clay-button mt-7 rounded-xl px-8 py-3 text-sm font-bold">
+          Fazer login
+        </Link>
+      </section>
     );
   }
 
@@ -67,7 +68,7 @@ export default function FavoritosPage() {
             <strong>Favoritar Evento</strong> para salvá-los aqui.
           </p>
           <Link
-            href="/"
+            href="/portal"
             className="inline-block clay-button font-bold px-8 py-3 rounded-xl text-sm mt-4"
           >
             Ver todos os eventos

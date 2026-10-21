@@ -3,21 +3,23 @@
 import { useState } from "react";
 import Link from "next/link";
 import Logo from "./Logo";
+import { useAuth } from "./AuthProvider";
 
 export default function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const { session, isReady, logout } = useAuth();
 
   return (
     <header className="sticky top-0 z-50 bg-primary backdrop-blur-md border-b border-[#5B8DEF]/20">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex justify-between items-center">
         {/* Logo Oficial Maré LN Educa+ */}
-        <Link href="/" className="hover:opacity-95 transition-opacity">
+        <Link href="/portal" className="hover:opacity-95 transition-opacity">
           <Logo variant="horizontal" theme="light" size="md" />
         </Link>
 
         {/* Links de Navegação Desktop */}
         <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/90">
-          <Link href="/" className="hover:text-[#8CC8E8] transition-colors py-1">
+          <Link href="/portal" className="hover:text-[#8CC8E8] transition-colors py-1">
             Início
           </Link>
           <Link href="/sobre" className="hover:text-[#8CC8E8] transition-colors py-1">
@@ -32,13 +34,21 @@ export default function Header() {
         </nav>
 
         {/* Botão de Ação CTA Desktop */}
-        <div className="hidden md:flex items-center">
-          <Link
-            href="/contato"
-            className="clay-button font-semibold px-5 py-2.5 rounded-xl text-sm"
-          >
-            Fazer contato
-          </Link>
+        <div className="hidden md:flex items-center gap-3">
+          {isReady && session?.kind === "user" ? (
+            <>
+              <span className="max-w-36 truncate text-sm font-semibold text-white/85">
+                Olá, {session.name?.split(" ")[0]}
+              </span>
+              <button onClick={logout} className="rounded-xl border border-white/30 px-4 py-2.5 text-sm font-semibold text-white transition hover:bg-white/10">
+                Sair
+              </button>
+            </>
+          ) : (
+            <Link href="/login" className="rounded-xl bg-white px-5 py-2.5 text-sm font-bold text-[#315f9e] shadow-sm transition hover:bg-[#EAF4FC]">
+              Entrar
+            </Link>
+          )}
         </div>
 
         {/* Botão Hambúrguer Mobile — animação nas barrinhas */}
@@ -77,7 +87,7 @@ export default function Header() {
       >
         <div className="bg-[#26364A] border-b border-[#5B8DEF]/20 px-4 pt-2 pb-6 space-y-1">
           {[
-            { href: "/", label: "Início" },
+            { href: "/portal", label: "Início" },
             { href: "/sobre", label: "Quem Somos" },
             { href: "/favoritos", label: "Favoritos" },
             { href: "/contato", label: "Contato" },
@@ -93,13 +103,25 @@ export default function Header() {
           ))}
 
           <div className="pt-3">
-            <Link
-              href="/contato"
-              onClick={() => setMobileMenuOpen(false)}
-              className="block text-center w-full clay-button font-semibold py-2.5 rounded-xl text-sm"
-            >
-              Fazer contato
-            </Link>
+            {isReady && session?.kind === "user" ? (
+              <button
+                onClick={() => {
+                  logout();
+                  setMobileMenuOpen(false);
+                }}
+                className="w-full rounded-xl border border-white/30 py-2.5 text-sm font-semibold text-white"
+              >
+                Sair da conta
+              </button>
+            ) : (
+              <Link
+                href="/login"
+                onClick={() => setMobileMenuOpen(false)}
+                className="block w-full rounded-xl bg-white py-2.5 text-center text-sm font-bold text-[#315f9e]"
+              >
+                Entrar
+              </Link>
+            )}
           </div>
         </div>
       </div>
