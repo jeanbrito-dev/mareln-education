@@ -151,7 +151,7 @@ export default function DivulgarEventoClient({
             Divulgar outro evento
           </button>
           <Link
-            href="/"
+            href="/portal"
             className="w-full sm:w-auto clay-button font-bold text-sm px-8 py-3 rounded-xl shadow-md text-center"
           >
             Voltar para o início
@@ -469,7 +469,7 @@ export default function DivulgarEventoClient({
       {/* Botões de Ação com Prevenção de Múltiplos Envios */}
       <div className="flex flex-col sm:flex-row items-center justify-between gap-4 pt-2">
         <Link
-          href="/"
+          href="/portal"
           className="w-full sm:w-auto text-center px-6 py-3.5 rounded-xl border border-slate-200 text-gray hover:bg-slate-50 font-semibold text-sm transition-colors duration-200 ease-out"
         >
           Cancelar

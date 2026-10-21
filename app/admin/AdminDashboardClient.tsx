@@ -228,7 +228,7 @@ export default function AdminDashboardClient({
 
         <div className="flex items-center gap-3">
           <Link
-            href="/"
+            href="/portal"
             className="px-4 py-2.5 rounded-xl border border-[#CFE2F5] bg-[#F5F9FC] hover:bg-[#EAF4FC] text-[#26364A] font-semibold text-xs transition-colors"
           >
             Ver Portal

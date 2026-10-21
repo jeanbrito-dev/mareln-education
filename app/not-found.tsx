@@ -88,7 +88,7 @@ export default function NotFound() {
             {/* Ações */}
             <div className="mt-7 flex flex-col justify-center gap-3 sm:flex-row">
               <Link
-                href="/"
+                href="/portal"
                 className="group inline-flex items-center justify-center gap-2 rounded-xl bg-[#5B8DEF] px-6 py-3.5 text-sm font-bold text-white shadow-lg shadow-[#5B8DEF]/20 transition-all duration-300 hover:-translate-y-0.5 hover:bg-[#4D7FE0] hover:shadow-xl hover:shadow-[#5B8DEF]/25 active:translate-y-0"
               >
                 Ir para o início
@@ -127,7 +127,7 @@ export default function NotFound() {
             </span>
 
             <Link
-              href="/"
+              href="/portal"
               className="transition-colors duration-200 hover:text-[#5B8DEF]"
             >
               Início

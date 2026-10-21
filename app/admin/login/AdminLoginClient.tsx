@@ -98,7 +98,7 @@ export default function AdminLoginClient() {
 
         <div className="text-center pt-2">
           <Link
-            href="/"
+            href="/portal"
             className="text-xs font-semibold text-[#5B8DEF] hover:text-[#7C83E8] transition-colors"
           >
             Voltar para o portal público
