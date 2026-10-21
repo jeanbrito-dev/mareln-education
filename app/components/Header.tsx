@@ -18,12 +18,15 @@ export default function Header() {
         </Link>
 
         {/* Links de Navegação Desktop */}
-        <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-white/90">
+        <nav className="hidden lg:flex items-center gap-6 text-sm font-medium text-white/90">
           <Link href="/portal" className="hover:text-[#8CC8E8] transition-colors py-1">
             Início
           </Link>
-          <Link href="/sobre" className="hover:text-[#8CC8E8] transition-colors py-1">
-            Quem Somos
+          <Link href="/gremios" className="hover:text-[#8CC8E8] transition-colors py-1">
+            Grêmios
+          </Link>
+          <Link href="/divulgar-evento" className="hover:text-[#8CC8E8] transition-colors py-1">
+            Divulgar Evento
           </Link>
           <Link href="/favoritos" className="hover:text-[#8CC8E8] transition-colors py-1">
             Favoritos
@@ -34,7 +37,7 @@ export default function Header() {
         </nav>
 
         {/* Botão de Ação CTA Desktop */}
-        <div className="hidden md:flex items-center gap-3">
+        <div className="hidden lg:flex items-center gap-3">
           {isReady && session?.kind === "user" ? (
             <>
               <span className="max-w-36 truncate text-sm font-semibold text-white/85">
@@ -54,7 +57,7 @@ export default function Header() {
         {/* Botão Hambúrguer Mobile — animação nas barrinhas */}
         <button
           onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-          className="md:hidden relative flex flex-col justify-center items-center w-10 h-10 rounded-xl hover:bg-white/10 transition-colors"
+          className="lg:hidden relative flex flex-col justify-center items-center w-10 h-10 rounded-xl hover:bg-white/10 transition-colors"
           aria-label={mobileMenuOpen ? "Fechar menu" : "Abrir menu de navegação"}
           aria-expanded={mobileMenuOpen}
         >
@@ -81,13 +84,15 @@ export default function Header() {
 
       {/* Menu Mobile com animação de slide */}
       <div
-        className={`md:hidden overflow-hidden transition-all duration-300 ease-in-out ${
+        className={`lg:hidden overflow-hidden transition-all duration-300 ease-in-out ${
           mobileMenuOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
         }`}
       >
         <div className="bg-[#26364A] border-b border-[#5B8DEF]/20 px-4 pt-2 pb-6 space-y-1">
           {[
             { href: "/portal", label: "Início" },
+            { href: "/gremios", label: "Grêmios Estudantis" },
+            { href: "/divulgar-evento", label: "Divulgar Evento" },
             { href: "/sobre", label: "Quem Somos" },
             { href: "/favoritos", label: "Favoritos" },
             { href: "/contato", label: "Contato" },
